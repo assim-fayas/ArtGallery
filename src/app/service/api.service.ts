@@ -41,7 +41,7 @@ private api='https://jsonplaceholder.typicode.com'
 
     return this.http.get<any>(`${this.api}/photos`).pipe(
       map(response=>{
-        console.log(response);
+       return response
         
       }),
       catchError(error => throwError(() => error))
