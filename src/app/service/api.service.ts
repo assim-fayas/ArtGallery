@@ -1,6 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import{HttpClient} from '@angular/common/http'
-import { catchError, map, tap, throwError } from 'rxjs';
+import { Observable, catchError, map, switchMap, tap, throwError } from 'rxjs';
+import { User } from '../model/userModel';
+import { Album } from '../model/albumModel';
 
 @Injectable({
   providedIn: 'root'
@@ -18,23 +20,80 @@ private api='https://jsonplaceholder.typicode.com'
   constructor() { }
 
 
-listUsers(){
-  return this.http.get(`${this.api}/users`).pipe(tap(response=>{
-  
-      return response
-    }),
-   catchError((error)=>{
-    return throwError(()=>error)
-   }),
-  
-  )
+  listUsers(): Observable<User[]> {
+    return this.http.get<any[]>(`${this.api}/users`).pipe( 
+      tap(response => console.log(response)),
+      map(users => users.map((user: any) => ({ // need to creta type
+        id: user.id.toString(),
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        city: user.address.city,
+        zipcode: user.address.zipcode
+      }))),
+      catchError(error => throwError(() => error))
+    );
+  }
+   
 
+
+  listImage():Observable<any>{
+
+    return this.http.get<any>(`${this.api}/photos`).pipe(
+      map(response=>{
+        console.log(response);
+        
+      }),
+      catchError(error => throwError(() => error))
+    )
+  }
+
+
+
+  listAlbums(): Observable<any> {
+    return this.getAlbumImageCounts().pipe(
+      switchMap(imageCounts => {
+        return this.http.get<any>(`${this.api}/albums`).pipe(
+          map(albums => {
+            return albums.map((album:any) => ({
+              ...album,
+              imageCount: imageCounts[album.id] || 0
+            }));
+          }),
+          catchError(error => throwError(() => error))
+        );
+      }),
+      catchError(error => throwError(() => error))
+    );
   }
 
 
 
 
-
-
-
+ private getAlbumImageCounts(): Observable<{ [albumId: number]: number }> {
+    return this.http.get<any>(`${this.api}/photos`).pipe(
+      map((albums: any[]) => {
+        const albumCounts: { [albumId: number]: number } = {};
+        albums.forEach(album => {
+          if (albumCounts[album.albumId]) {
+            albumCounts[album.albumId]++;
+          } else {
+            albumCounts[album.albumId] = 1;
+          }
+        });
+        
+        return albumCounts;
+      })
+    );
+  }
 }
+
+
+
+
+
+
+
+
+
+
