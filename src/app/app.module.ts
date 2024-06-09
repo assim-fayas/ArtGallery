@@ -10,6 +10,7 @@ import { ImagesComponent } from './components/images/images.component';
 import { RouterModule } from '@angular/router';
 import { AgGridAngular } from 'ag-grid-angular';
 import { HttpClientModule } from '@angular/common/http';
+import { AgCellNavigationComponent } from './utility/ag-cell-navigation/ag-cell-navigation.component';
 
 
 
@@ -21,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     SidebarComponent,
     UsersComponent,
     AlbumsComponent,
-    ImagesComponent
+    ImagesComponent,
+    AgCellNavigationComponent
   ],
   imports: [
     BrowserModule,
