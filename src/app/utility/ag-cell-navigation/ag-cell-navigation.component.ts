@@ -14,6 +14,10 @@ rowValue!:User
 agInit(params: ICellRendererParams<any, any, any>): void {
 this.rowValue= params.data;
 this.cellValue=params.value
+console.log(this.rowValue,"rowValue");
+
+
+
   
 }
 

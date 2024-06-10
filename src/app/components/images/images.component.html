@@ -1,1 +1,17 @@
-<p>images works!</p>
+<div  class="container mx-auto p-4">
+  <p class="text-3xl font-medium">{{title}}<span class="text-base text-blue-500" *ngIf="albumName">(Album{{albumName}}) </span></p>
+
+  <app-drop-down-filter (filteredImages)="onFilterImages($event)"  (filteredAlbumName)="onSelectedAlbum($event)" [section]="title" ></app-drop-down-filter>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-4 mt-10">
+      <div class="cursor-pointer" *ngFor="let item of images" (click)="openModal(item)">
+        <div class=" bg-violet-200 rounded-t-md  h-36 flex items-center justify-center">
+          <img class="w-full h-full object-cover rounded-t-md" [src]="'https://picsum.photos/id/'+item.id+'/400/300'"  alt="Image" />
+        </div>
+        <div class="p-4">
+          <p class="text-gray-600 text-sm">{{"IMG_0000"+item.id+".JPG"}}</p>
+        </div>
+      </div>
+
+      <app-modal *ngIf="showModal" (closeModal)="closeModal()" [imageName]="imageName" [userName]="'Leanne Graham'" [albumName]="albumId"></app-modal>
+  </div>

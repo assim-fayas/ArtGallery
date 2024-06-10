@@ -1,0 +1,23 @@
+
+<div class="max-w-sm mx-auto my-6">
+    <div class="flex items-center space-x-2">
+      <select [(ngModel)]="selectedOption" class="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        <option value="" >{{section=="Albums" ? "all users" : "all albums"}}</option>
+        <ng-container *ngIf="section === 'Albums'">
+        <option *ngFor="let option of options" [value]="option.id">{{option.name}}</option>
+      </ng-container>
+      <ng-container *ngIf="section === 'Images'">
+        <option *ngFor="let option of albums" [value]="option.id"> Album{{option.id}}</option>
+      </ng-container>
+      </select>
+      <button (click)=" search()" class="px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+        Search
+      </button>
+    
+      <svg (click)="reset()" class="w-14 rounded-md hover:bg-gray-400   h-10 text-gray-800 bg-gray-300  dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4"/>
+      </svg>
+      
+    </div>
+  </div>
+  
