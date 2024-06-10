@@ -16,7 +16,7 @@ listAlbum!:Album[]
 userName:string=''
 
 ngOnInit(): void {
-  this.albumService.listAlbums().subscribe({
+this.albumService.listAlbums().subscribe({
 next:(res)=>{
 this.listAlbum=res
 console.log(this.listAlbum);
@@ -36,8 +36,8 @@ onFilterUser(user:string){
 }
 
 onNavigateToImage(item:Album){
-  console.log(item);
-  this.router.navigate(['/images'])
+  console.log(item,"item for navvv");
+  this.router.navigate(['/images',{albumId:item.id}])
   
 
 }

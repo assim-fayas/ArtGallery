@@ -1,5 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Image } from 'src/app/model/imageModel';
+import { User } from 'src/app/model/userModel';
 import { ApiService } from 'src/app/service/api.service';
 
 @Component({
@@ -9,15 +11,27 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class ImagesComponent implements OnInit{
  apiService:ApiService=inject(ApiService)
+ activeRoute:ActivatedRoute=inject(ActivatedRoute)
 
 
 images!:Image[]
 title:string='Images'
-albumName:string=''
+albumName!:number
 showModal = false;
+imageName!:number
+userName!:string
+albumId!:number
+
+
 
   ngOnInit(): void {
     this.listImage()
+
+    this.activeRoute.params.subscribe((data)=>{
+      this.albumId=data['albumId']
+    })
+    
+    
     
   }
 
@@ -29,9 +43,8 @@ showModal = false;
    
   }
   onSelectedAlbum(value:string){
-    this.albumName=value
+    this.albumName=+value
   }
-
 
   private  listImage(){
     this.apiService.listImage().subscribe({
@@ -42,12 +55,19 @@ showModal = false;
       }
     })
   }
+openModal(item:Image) {
+  this.imageName=item.id
+  this.albumId=item.albumId
 
-
-  
-
-openModal() {
   this.showModal = true;
+
+
+  const user=this.apiService.listUsers().subscribe({
+    next:(value)=> {
+      console.log(value,"valueeeeee");
+      
+    },
+  })
 }
 
 closeModal() {

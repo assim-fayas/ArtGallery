@@ -14,13 +14,6 @@ export class ApiService {
 
 private api='https://jsonplaceholder.typicode.com'
 
-
-user:any=new Subject()
-
-
-
-
-
   constructor() { }
 
 
@@ -71,12 +64,7 @@ user:any=new Subject()
     );
   }
 
-
-
-
-
-
-
+  
 
  private getAlbumImageCounts(): Observable<{ [albumId: number]: number }> {
     return this.http.get<any>(`${this.api}/photos`).pipe(

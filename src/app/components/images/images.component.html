@@ -4,7 +4,7 @@
   <app-drop-down-filter (filteredImages)="onFilterImages($event)"  (filteredAlbumName)="onSelectedAlbum($event)" [section]="title" ></app-drop-down-filter>
 
     <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-4 mt-10">
-      <div class="cursor-pointer" *ngFor="let item of images" (click)="openModal()">
+      <div class="cursor-pointer" *ngFor="let item of images" (click)="openModal(item)">
         <div class=" bg-violet-200 rounded-t-md  h-36 flex items-center justify-center">
           <img class="w-full h-full object-cover rounded-t-md" [src]="'https://picsum.photos/id/'+item.id+'/400/300'"  alt="Image" />
         </div>
@@ -13,5 +13,5 @@
         </div>
       </div>
 
-      <app-modal *ngIf="showModal" (closeModal)="closeModal()" [title]="'Custom Modal Title'" [content]="'This is the modal content.'"></app-modal>
+      <app-modal *ngIf="showModal" (closeModal)="closeModal()" [imageName]="imageName" [userName]="'Leanne Graham'" [albumName]="albumId"></app-modal>
   </div>

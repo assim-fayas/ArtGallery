@@ -6,8 +6,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent {
-  @Input() title: string = '';
-  @Input() content: string = '';
+  @Input() imageName!: number ;
+  @Input() userName: string = '';
+  @Input() albumName!: number;
   @Output() closeModal = new EventEmitter<false>();
 
   close() {

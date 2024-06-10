@@ -66,7 +66,6 @@ if(this.section=="Albums"){
 
   }
   if(this.section=="Images"){
-     //neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
     
     if(this.selectedOption!=''){
 
