@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
 import { User } from 'src/app/model/userModel';
-import { ApiService } from 'src/app/service/api.service';
 import { AgCellNavigationComponent } from 'src/app/utility/ag-cell-navigation/ag-cell-navigation.component';
 
 
@@ -12,25 +11,17 @@ import { AgCellNavigationComponent } from 'src/app/utility/ag-cell-navigation/ag
   providers: [AgCellNavigationComponent] 
 
 })
-export class UsersComponent implements OnInit{
+export class UsersComponent {
 
- private apiService:ApiService=inject(ApiService)
+users!:User[]
+title:string='Users'
 
 
-  users!:User[]
-
-  ngOnInit(): void {
-    this.apiService.listUsers().subscribe({
-      next:(response)=>{
-     this.users=response
-     console.log(this.users,"useeer");
-     
-    }
-  
-  })
+  handleUsers(users:User[]){
+    this.users=users
   }
 
- 
+
 colDefs: ColDef[] = [
   { field: "name",flex:1,minWidth: 200, maxWidth: 500, cellStyle: { textAlign: 'center' }},
   { field: "username",flex:1,filter:true,minWidth: 200, maxWidth: 500,cellStyle: { textAlign: 'center' }},
@@ -43,6 +34,7 @@ colDefs: ColDef[] = [
 
 
 
+//test
 
 
 

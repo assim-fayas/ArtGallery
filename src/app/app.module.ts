@@ -11,6 +11,10 @@ import { RouterModule } from '@angular/router';
 import { AgGridAngular } from 'ag-grid-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { AgCellNavigationComponent } from './utility/ag-cell-navigation/ag-cell-navigation.component';
+import { DropDownFilterComponent } from './components/drop-down-filter/drop-down-filter.component';
+import { SearchComponent } from './components/search/search.component';
+import { FormsModule } from '@angular/forms';
+import { ModalComponent } from './utility/modal/modal.component';
 
 
 
@@ -23,14 +27,18 @@ import { AgCellNavigationComponent } from './utility/ag-cell-navigation/ag-cell-
     UsersComponent,
     AlbumsComponent,
     ImagesComponent,
-    AgCellNavigationComponent
+    AgCellNavigationComponent,
+    DropDownFilterComponent,
+    SearchComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
     AgGridAngular,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   
 
    

@@ -1,8 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import{HttpClient} from '@angular/common/http'
-import { Observable, catchError, map, switchMap, tap, throwError } from 'rxjs';
+import { Observable, Subject, catchError, map, switchMap, tap, throwError } from 'rxjs';
 import { User } from '../model/userModel';
 import { Album } from '../model/albumModel';
+import { Image } from '../model/imageModel';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,9 @@ export class ApiService {
   http:HttpClient=inject(HttpClient)
 
 private api='https://jsonplaceholder.typicode.com'
+
+
+user:any=new Subject()
 
 
 
@@ -24,7 +28,7 @@ private api='https://jsonplaceholder.typicode.com'
     return this.http.get<any[]>(`${this.api}/users`).pipe( 
       tap(response => console.log(response)),
       map(users => users.map((user: any) => ({ // need to creta type
-        id: user.id.toString(),
+        id: user.id,
         name: user.name,
         username: user.username,
         email: user.email,
@@ -37,9 +41,9 @@ private api='https://jsonplaceholder.typicode.com'
    
 
 
-  listImage():Observable<any>{
+  listImage():Observable<Image[]>{
 
-    return this.http.get<any>(`${this.api}/photos`).pipe(
+    return this.http.get<Image[]>(`${this.api}/photos`).pipe(
       map(response=>{
        return response
         
@@ -50,10 +54,10 @@ private api='https://jsonplaceholder.typicode.com'
 
 
 
-  listAlbums(): Observable<any> {
+  listAlbums(): Observable<Album[]> {
     return this.getAlbumImageCounts().pipe(
       switchMap(imageCounts => {
-        return this.http.get<any>(`${this.api}/albums`).pipe(
+        return this.http.get<Album[]>(`${this.api}/albums`).pipe(
           map(albums => {
             return albums.map((album:any) => ({
               ...album,
@@ -66,6 +70,10 @@ private api='https://jsonplaceholder.typicode.com'
       catchError(error => throwError(() => error))
     );
   }
+
+
+
+
 
 
 

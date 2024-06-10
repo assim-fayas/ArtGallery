@@ -1,11 +1,17 @@
 
-<div class="grid-table">
-    <div>
-<ag-grid-angular class="ag-theme-quartz" style="width:1200px; height: 400px"
+<div class="container mx-auto p-4">
+  <p class="text-3xl font-medium">{{ title }}</p>
+  <app-search (searchResult)="handleUsers($event)"></app-search>
+  <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-4 mt-10">
 
-[rowData]="users"
-[columnDefs]="colDefs">
-
-</ag-grid-angular>
-</div>
+    
+    <div class="col-span-1 sm:col-span-3 lg:col-span-6">
+      <ag-grid-angular 
+        class="ag-theme-quartz"
+        style="width: 100%; height: 400px;"
+        [rowData]="users"
+        [columnDefs]="colDefs">
+      </ag-grid-angular>
+    </div>
+  </div>
 </div>

@@ -3,5 +3,6 @@ export interface Album{
     id:number,
     albumName?:string,
     title:string,
-    imageCount:number
+    imageCount:number,
+    userName?:string
 }
