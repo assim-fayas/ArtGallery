@@ -1,27 +1,48 @@
-# ArtGallery
+# Angular Image Gallery
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
+This is a simple web application built with Angular to list users and view the albums and images associated with each user. The application meets the requirements outlined in the task document.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Sidebar navigation for Users, Albums, and Images
+- User page with ag-grid for displaying users and global search functionality
+- Navigation from the user grid to the albums page with pre-selected user
+- Albums page displaying albums with the total number of images
+- Image gallery page listing images and providing search functionality
+- Modal for image details with download option
+- Responsive design and visually appealing layout
 
-## Code scaffolding
+## Setup Instructions
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Prerequisites
 
-## Build
+- Node.js (v14 or higher)
+- Angular CLI (v12 or higher)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Installation
 
-## Running unit tests
+1. Clone the repository:
+- git clone https://github.com/yourusername/angular-image-gallery.git
+cd angular-image-gallery
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2.Install dependencies:
+-npm install
 
-## Running end-to-end tests
+3.Run the application:
+- ng serve
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### APIs Used
 
-## Further help
+- Users: https://jsonplaceholder.typicode.com/users
+- Albums: https://jsonplaceholder.typicode.com/albums
+- Images: https://jsonplaceholder.typicode.com/photos
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Screenshots
+
+
+### Additional Notes
+
+-Ensure you have an internet connection to fetch data from the APIs.
+
+
+
