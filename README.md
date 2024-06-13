@@ -14,7 +14,7 @@ This is a simple web application built with Angular to list users and view the a
 
 ## Live Demo
 
-Check out the live demo [here](art-gallery-sable.vercel.app).
+Check out the live demo [here](https://art-gallery-sable.vercel.app).
 
 ## Setup Instructions
 
