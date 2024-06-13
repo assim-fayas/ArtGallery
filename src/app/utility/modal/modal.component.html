@@ -13,8 +13,6 @@
         <img class="w-full h-full object-cover rounded-t-md" [src]="'https://picsum.photos/id/'+imageName+'/400/300'"  alt="Image" />
       </div>
       <div class="flex justify-end">
-        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" (click)="close()">Download Image</button>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" (click)="onDownload('https://picsum.photos/id/' + imageName + '/400/300')">Download Image</button>
         <button class="ml-2 text-gray-500 px-4 py-2 rounded hover:text-gray-700" (click)="close()">Cancel</button>
       </div>
-    </div>
-  </div>
