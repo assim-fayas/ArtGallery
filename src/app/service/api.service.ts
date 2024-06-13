@@ -17,7 +17,7 @@ private api='https://jsonplaceholder.typicode.com'
  //listing users 
 listUsers(): Observable<User[]> {
     return this.http.get<any[]>(`${this.api}/users`).pipe( 
-      tap(response => console.log(response)),
+      tap(),
       map(users => users.map((user: any) => ({ // need to creta type
         id: user.id,
         name: user.name,

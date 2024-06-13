@@ -4,8 +4,7 @@
 
   <app-drop-down-filter (filteredAlbum)="onFilterAlbum($event)" (filteredUser)="onFilterUser($event)"  [section]="title"  [chnagedSelectedOption]="slectedOPtionsOfUserId" ></app-drop-down-filter>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-    
-      <div  *ngFor="let item of listAlbum"  class="bg-white border border-gray-200 rounded-lg shadow-lg" >
+                 <div  *ngFor="let item of listAlbum"  class="bg-white border border-gray-200 rounded-lg shadow-lg" >
         <div (click)="onNavigateToImage(item)" class="bg-green-200 rounded-t-lg h-48 flex items-center justify-center cursor-pointer">
           <img class="w-full h-full object-cover rounded-t-lg" [src]="'https://picsum.photos/id/'+item.id +'/400/300'"  alt="Album Image" />
         </div>
@@ -13,8 +12,8 @@
           <h5 class="text-lg font-bold text-gray-900">{{"Album"+item.id}}</h5>
           <p class="text-gray-600">{{item.imageCount}} Images</p>
         </div>
-       
+     
       </div>
-
+  
   </div>
   

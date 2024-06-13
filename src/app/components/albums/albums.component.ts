@@ -14,6 +14,9 @@ albumService:ApiService=inject(ApiService)
 router:Router=inject(Router)
 activeRoute:ActivatedRoute=inject(ActivatedRoute)
 
+// loader
+isLoading:boolean=true
+
 title:string= 'Albums'
 listAlbum!:Album[]
 userName:string=''
