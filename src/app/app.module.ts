@@ -30,7 +30,8 @@ import { ModalComponent } from './utility/modal/modal.component';
     AgCellNavigationComponent,
     DropDownFilterComponent,
     SearchComponent,
-    ModalComponent
+    ModalComponent,
+   
   ],
   imports: [
     BrowserModule,
