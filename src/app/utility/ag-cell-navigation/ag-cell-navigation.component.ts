@@ -9,15 +9,14 @@ import { User } from 'src/app/model/userModel';
   templateUrl: './ag-cell-navigation.component.html',
 })
 export class AgCellNavigationComponent implements  ICellRendererAngularComp{
+  router:Router=inject(Router)
+//cell value
 cellValue!:string
+// row values
 rowValue!:User
-router:Router=inject(Router)
-
 
 agInit(params: ICellRendererParams<any, any, any>): void {
-// row values  
 this.rowValue= params.data;
-//cell value
 this.cellValue=params.value 
 }
 

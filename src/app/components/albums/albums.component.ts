@@ -20,12 +20,10 @@ userName:string=''
 slectedOPtionsOfUserId:string=''
 
 ngOnInit(): void {
+  //calling the listalbum service for listing the album
 this.albumService.listAlbums().subscribe({
 next:(res)=>{
 this.listAlbum=res
-console.log(this.listAlbum);
-
-
 }
   })
 
@@ -38,17 +36,16 @@ this.activeRoute.params.subscribe((data)=>{
 
 }
 
+//value emitted from child component(drop-down filter component)
 onFilterAlbum(value:Album[]){
-  this.listAlbum=value
-  
+  this.listAlbum=value 
 }
-
 onFilterUser(user:string){
   this.userName=user
 }
 
+//navigation to image component
 onNavigateToImage(item:Album){
-  console.log(item,"item for navvv");
   this.router.navigate(['/images',{albumId:item.id}])
   
 
