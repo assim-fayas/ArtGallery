@@ -14,7 +14,7 @@ export class ApiService {
 
 private api='https://jsonplaceholder.typicode.com'
 
-  constructor() { }
+  constructor() {}
 
 
   listUsers(): Observable<User[]> {
@@ -82,6 +82,8 @@ private api='https://jsonplaceholder.typicode.com'
       })
     );
   }
+
+  
 }
 
 

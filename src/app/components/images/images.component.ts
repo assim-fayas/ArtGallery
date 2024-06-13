@@ -21,14 +21,17 @@ showModal = false;
 imageName!:number
 userName!:string
 albumId!:number
+slectedOPtionsOfAlbumId:string=''
 
 
 
   ngOnInit(): void {
     this.listImage()
 
+    //accesiing route values
     this.activeRoute.params.subscribe((data)=>{
-      this.albumId=data['albumId']
+      this.slectedOPtionsOfAlbumId=data['albumId']
+      this.albumName=data['albumId']
     })
     
     
@@ -37,8 +40,6 @@ albumId!:number
 
   onFilterImages(value:Image[]){
    
-    console.log(value,"watch");
-    
     this.images=value
    
   }
