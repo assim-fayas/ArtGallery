@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import {  Router } from '@angular/router';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 import { User } from 'src/app/model/userModel';
@@ -7,32 +8,26 @@ import { User } from 'src/app/model/userModel';
   selector: 'app-ag-cell-navigation',
   templateUrl: './ag-cell-navigation.component.html',
 })
-export class AgCellNavigationComponent implements OnInit, ICellRendererAngularComp{
+export class AgCellNavigationComponent implements  ICellRendererAngularComp{
 cellValue!:string
 rowValue!:User
+router:Router=inject(Router)
+
 
 agInit(params: ICellRendererParams<any, any, any>): void {
+// row values  
 this.rowValue= params.data;
-this.cellValue=params.value
-console.log(this.rowValue,"rowValue");
-
-
-
-  
+//cell value
+this.cellValue=params.value 
 }
 
 refresh(params: ICellRendererParams<any, any, any>): boolean {
   return false
 }
 
-
-
-
-
-ngOnInit(): void {
-  
+//navigation to albums component
+onNavigateAlbum(){
+this.router.navigate(['/albums',{id:this.rowValue.id,name:this.rowValue.name}])
 }
-
-
 
 }
