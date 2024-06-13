@@ -16,12 +16,12 @@ export class UsersComponent {
 users!:User[]
 title:string='Users'
 
-
+// value emitted from child component(search comp)
   handleUsers(users:User[]){
     this.users=users
   }
 
-
+//ag grid 
 colDefs: ColDef[] = [
   { field: "name",flex:1,minWidth: 200, maxWidth: 500, cellStyle: { textAlign: 'center' }},
   { field: "username",flex:1,filter:true,minWidth: 200, maxWidth: 500,cellStyle: { textAlign: 'center' }},
@@ -30,9 +30,6 @@ colDefs: ColDef[] = [
   { field: "zipcode" ,flex:1,filter:true,minWidth: 200, maxWidth: 500,cellStyle: { textAlign: 'center' } ,cellRenderer:AgCellNavigationComponent },
 
 ];
-
-
-
 
 
 }

@@ -9,15 +9,13 @@ import { Image } from '../model/imageModel';
   providedIn: 'root'
 })
 export class ApiService {
+ http:HttpClient=inject(HttpClient)
 
-  http:HttpClient=inject(HttpClient)
-
+//api
 private api='https://jsonplaceholder.typicode.com'
 
-  constructor() {}
-
-
-  listUsers(): Observable<User[]> {
+ //listing users 
+listUsers(): Observable<User[]> {
     return this.http.get<any[]>(`${this.api}/users`).pipe( 
       tap(response => console.log(response)),
       map(users => users.map((user: any) => ({ // need to creta type
@@ -33,10 +31,9 @@ private api='https://jsonplaceholder.typicode.com'
   }
    
 
-
+ //listing images
   listImage():Observable<Image[]>{
-
-    return this.http.get<Image[]>(`${this.api}/photos`).pipe(
+ return this.http.get<Image[]>(`${this.api}/photos`).pipe(
       map(response=>{
        return response
         
@@ -46,7 +43,7 @@ private api='https://jsonplaceholder.typicode.com'
   }
 
 
-
+//listing albums
   listAlbums(): Observable<Album[]> {
     return this.getAlbumImageCounts().pipe(
       switchMap(imageCounts => {
@@ -64,9 +61,8 @@ private api='https://jsonplaceholder.typicode.com'
     );
   }
 
-  
-
- private getAlbumImageCounts(): Observable<{ [albumId: number]: number }> {
+//custom function for the counting of images for each albums
+private getAlbumImageCounts(): Observable<{ [albumId: number]: number }> {
     return this.http.get<any>(`${this.api}/photos`).pipe(
       map((albums: any[]) => {
         const albumCounts: { [albumId: number]: number } = {};

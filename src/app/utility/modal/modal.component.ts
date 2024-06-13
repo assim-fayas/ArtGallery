@@ -32,6 +32,7 @@ export class ModalComponent {
         link.click();
         document.body.removeChild(link);
         window.URL.revokeObjectURL(url); 
+        this.close()
       })
       .catch(error => console.error('Download error:', error));
   }

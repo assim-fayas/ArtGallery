@@ -23,56 +23,77 @@ userName!:string
 albumId!:number
 slectedOPtionsOfAlbumId:string=''
 
-
-
   ngOnInit(): void {
+    //calling the list image api
     this.listImage()
-
     //accesiing route values
     this.activeRoute.params.subscribe((data)=>{
       this.slectedOPtionsOfAlbumId=data['albumId']
       this.albumName=data['albumId']
     })
-    
-    
-    
+     
   }
 
-  onFilterImages(value:Image[]){
-   
+//events emitted from cj=hild component(drop-down filter component)
+  onFilterImages(value:Image[]){ 
     this.images=value
-   
   }
+
   onSelectedAlbum(value:string){
     this.albumName=+value
   }
 
+
+// for lsiting the images
   private  listImage(){
     this.apiService.listImage().subscribe({
       next:(response)=>{
       this.images=response
-      console.log(response);
-      
       }
     })
   }
-openModal(item:Image) {
-  this.imageName=item.id
-  this.albumId=item.albumId
 
+
+
+//opening modal,populating the user name,image name,image
+async openModal(item: Image) {
+  this.imageName = item.id;
+  this.albumId = item.albumId;
   this.showModal = true;
-
-
-  const user=this.apiService.listUsers().subscribe({
-    next:(value)=> {
-      console.log(value,"valueeeeee");
-      
-    },
-  })
+  const userName = await this.getTheUserName(this.albumId);
+  if (userName) {
+    this.userName = userName;
+     }
 }
 
+// closing the modal
 closeModal() {
   this.showModal = false;
 }
 
+
+//helper function for finding the username
+async getTheUserName(albumId: number): Promise<string | null> {
+  try {
+    const users = await this.apiService.listUsers().toPromise();
+    const albums = await this.apiService.listAlbums().toPromise();
+
+    if (!albums || !users) {
+      console.error('Albums or users data is missing');
+      return null;
+    }
+
+    const album = albums.find(album => album.id === albumId);
+    if (album) {
+      const user = users.find(user => user.id === album.userId);
+      if (user) {
+        return user.name;
+      }
+    }
+    return null;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return null;
+  }
+}
 }
