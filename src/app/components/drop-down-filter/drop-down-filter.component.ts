@@ -163,7 +163,7 @@ private apiService: ApiService = inject(ApiService);
   }
 
   //fectch the required data according to the sections
-  private fetchData(): Observable<any> {
+  private fetchData(): Observable<{users: UserFilter[],albums: Album[]} | { albums: Album[], image: Image[]} > {
     if (this.section === "Albums") {
       return forkJoin({
         users: this.getTheUsers(),
@@ -176,7 +176,7 @@ private apiService: ApiService = inject(ApiService);
         image:this.listImage()
       });
     } else {
-      return of({});
+      return of({users:[],albums:[]} as {users:UserFilter[];albums:Album[]}|{albums:Album[];image: Image[]});
     }
   }
 

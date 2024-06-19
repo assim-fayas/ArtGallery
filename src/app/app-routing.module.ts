@@ -6,9 +6,18 @@ import { ImagesComponent } from './components/images/images.component';
 //routes
 const routes: Routes = [
 {path:'',redirectTo:'users',pathMatch:'full'},
-{path:'users',component:UsersComponent},
-{path:'albums',component:AlbumsComponent},
-{path:'images',component:ImagesComponent}
+{
+  path:'users',
+  loadComponent:()=>import('./components/users/users.component').then(c=>c.UsersComponent)
+},
+{
+  path:'albums',
+  loadComponent:()=>import('./components/albums/albums.component').then(c=>c.AlbumsComponent)
+},
+{
+  path:'images',
+ loadComponent:()=>import('./components/images/images.component').then(c=>c.ImagesComponent)
+}
 ];
 
 @NgModule({
