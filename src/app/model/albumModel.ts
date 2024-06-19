@@ -6,3 +6,4 @@ export interface Album{
     imageCount:number,
     userName?:string
 }
+

@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, forkJoin, map } from 'rxjs';
 import { Image } from 'src/app/model/imageModel';
 import { User } from 'src/app/model/userModel';
 import { ApiService } from 'src/app/service/api.service';
@@ -56,14 +57,15 @@ slectedOPtionsOfAlbumId:string=''
 
 
 //opening modal,populating the user name,image name,image
-async openModal(item: Image) {
+ openModal(item: Image) {
   this.imageName = item.id;
   this.albumId = item.albumId;
   this.showModal = true;
-  const userName = await this.getTheUserName(this.albumId);
-  if (userName) {
-    this.userName = userName;
-     }
+  this.getTheUserName(this.albumId).subscribe((userName)=>{
+    if (userName) {
+      this.userName = userName;
+       }
+  })
 }
 
 // closing the modal
@@ -73,27 +75,28 @@ closeModal() {
 
 
 //helper function for finding the username
-async getTheUserName(albumId: number): Promise<string | null> {
-  try {
-    const users = await this.apiService.listUsers().toPromise();
-    const albums = await this.apiService.listAlbums().toPromise();
-
-    if (!albums || !users) {
+getTheUserName(albumId: number): Observable<string|null> {
+return forkJoin([
+  this.apiService.listUsers(),
+  this.apiService.listAlbums()
+]).pipe(
+  map(([users,albums])=>{
+      if (!albums || !users) {
       console.error('Albums or users data is missing');
       return null;
     }
-
     const album = albums.find(album => album.id === albumId);
-    if (album) {
-      const user = users.find(user => user.id === album.userId);
-      if (user) {
-        return user.name;
+      if (album) {
+        const user = users.find(user => user.id === album.userId);
+        if (user) {
+          return user.name;
+        }
       }
+      return null;
     }
-    return null;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    return null;
-  }
-}
+  )
+)}
+
+
+
 }
