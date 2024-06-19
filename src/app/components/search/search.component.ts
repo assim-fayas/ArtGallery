@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
+import { Subject, debounceTime } from 'rxjs';
 import { User } from 'src/app/model/userModel';
 import { ApiService } from 'src/app/service/api.service';
 
@@ -9,6 +10,7 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class SearchComponent implements OnInit {
 private apiService:ApiService=inject(ApiService)
+private onDebounceTime=new Subject<string>
 users!:User[]
 
 @Output() searchResult:EventEmitter<User[]>=new EventEmitter()
@@ -20,6 +22,12 @@ ngOnInit(): void {
         this.searchResult.emit(this.users);
       }
     });
+    //enabling the debouncing
+    this.onDebounceTime.pipe(debounceTime(600)).subscribe((value)=>{
+    this.onSearch(value)
+    })
+
+    
   }
   
 //for serching based on the user input
@@ -35,15 +43,11 @@ ngOnInit(): void {
     const inputEvent = event as InputEvent;
     if (inputEvent?.target instanceof HTMLInputElement) {
       const searchValue = inputEvent.target.value;
-      this.throttledOnSearch(searchValue);
-    }
-  }
 
-  // enabling throtling
-  private throttledOnSearch(searchValue: string): void {
-    setTimeout(() => {
-      this.onSearch(searchValue);
-    }, 600); 
+      //emitting value to the subject(onDebounceTime)
+      this.onDebounceTime.next(searchValue)
+    }
+   
   }
 
 }
